@@ -1,7 +1,8 @@
-﻿#-*- encoding: utf-8 -*-
+#-*- encoding: utf-8 -*-
 from django.db import models
 from django.contrib import admin
 from gym.models.wechat import Wechat
+from gym.models.course import BaseCourse
     
 class User(models.Model): 
     GENDER_MAN = 10
@@ -18,6 +19,7 @@ class User(models.Model):
     #如果wechat为None，说明该用户尚未绑定微信 
     wechat = models.OneToOneField(Wechat, blank=True, null=True, verbose_name=u"微信号") 
     address = models.TextField(u"住址", max_length=512, blank=True)
+    courses = models.ManyToManyField(BaseCourse, related_name=u"users", verbose_name=u"课程列表")
 
     class Meta(object):
         abstract = False
